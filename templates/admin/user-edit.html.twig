@@ -1,0 +1,46 @@
+{% extends 'admin-temp.html.twig' %}
+{% block aTitle %}Admin Dashboard{% endblock %}
+{% block dcTitle %}
+Edit User
+{% endblock %}
+{% block body %}
+    <h1 class="h3 mb-3 font-weight-normal">Edit User</h1>
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Fill in the blanks please !</h6>
+            </div>
+            <div class="card-body">
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}})}}
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.firstname) }}
+            </div>
+                    </div>
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(form.username) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(form.plainPassword) }}
+            </div>
+        </div>
+        <button class="btn btn-primary" type="submit">
+            Update Profile
+        </button>
+        {{form_rest(form)}}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'admin-temp.html.twig' %}
+{% block dcTitle %}User Details{% endblock %}
+{% block body %}
+<h1 class="h3 mb-2 text-gray-800 font-weight-bold">User Details</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">User Details</h6>
+    </div>
+    <div class="card-body">
+    {% if is_granted('ROLE_ADMIN') %}
+        <div class="mt-1  p-1">
+            {% if user.roles[0]=='ROLE_ADMIN' %}
+            <span class="badge badge-pill badge-warning p-2">ADMIN</span>
+            {% else %}
+            <span class="badge badge-pill badge-info p-2">USER</span>
+            {% endif %}
+        </div>
+    {% endif %}
+        <p class="mt-2 font-weight-bold">First Name :<span> {{user.firstname}}</span></p>
+        <p class="mt-2 font-weight-bold">Last Name :<span> {{user.lastname}}</span></p>
+        <p class="mt-2 font-weight-bold">Username :<span> {{user.username}}</span></p>
+        <p class="mt-2 font-weight-bold">Email :<span> {{user.email}}</span></p>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'admin-temp.html.twig' %}
+
+{% block dcTitle %}Event Details{% endblock %}
+
+{% block body %}
+<h1 class="h3 mb-2 text-gray-800 font-weight-bold mb-4">Event Details</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Event Details</h6>
+    </div>
+    <div class="card-body">
+        <div class="profile-card-2 float-left ml-3"><img src="{{asset('uploads/images/'~ event.image)}}" class="img img-responsive">
+        <div class="profile-name">{{event.name}}</div>
+        </div>
+        <div class="card shadow" style="width:700px; margin-left:350px; margin-top:50px;">
+            <div>
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Description of the Event</h6>
+                </div>
+                <div class="card-body">
+                    <p>{{event.description}}</p>
+                </div>
+            </div>  
+        </div>
+        <div class="card shadow" style="width:300px; margin-left:350px; margin-top:40px;">
+            <div>
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Date and Time of the Event</h6>
+                </div>
+                <div class="card-body">
+                    <p>{{event.beginsAt |date("m/d/Y H:i") }}</p>
+                </div>
+         </div>
+         </div>
+         <div class="float-right mr-5 mt-5">
+            {% if app.user %}
+            {% if  app.user not in event.participants %}
+                <a href="{{path('event.join',{id: event.id})}}" class="btn btn-info text-white  rounded-pill mr-2">Join</a>
+            {% endif %}  
+            {% endif %}
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{path('event.edit',{id: event.id})}}" class="btn btn-success text-white  rounded-pill mr-2 ">Edit</a>
+                <a href="{{path('event.delete',{id: event.id})}}" class="btn btn-danger text-white  rounded-pill ">Delete</a>
+            {% endif %}
+         </div>
+</div>
+
+{% endblock %}
+    

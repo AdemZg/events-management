@@ -1,0 +1,118 @@
+{% extends 'admin-temp.html.twig' %}
+{% block dcTitle %}Users{% endblock %}
+{% block body %}
+<h1 class="h3 mb-4 text-gray-800 font-weight-bold">User Stats</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">All Stats</h6>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    Number of users verified
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">{{all}}</div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fa fa-users fa-2x text-gray-500"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h1 class="h3 mb-4 text-gray-800 font-weight-bold">List of Users</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Manage Users</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <div class="ml-1 mb-1">
+                <label>Search:<input id="search-input" type="search" class="form-control form-control-sm" placeholder="Search Here" ></label>
+             </div>
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr id="tricks">
+                        <td>{{user.id}}</td>
+                        <td>{{user.firstname}}</td>
+                        <td>{{user.lastname}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                        <td>
+                        <div class="d-flex justify-content-center p-1">
+                        {% if user.roles[0]=='ROLE_ADMIN' %}
+                        <span class="badge badge-pill badge-warning p-2">ADMIN</span>
+                        {% else %}
+                        <span class="badge badge-pill badge-info p-2">USER</span>
+                        {% endif %}
+                        </div>
+                        </td>
+                        <td>
+                        <a href="{{path('user.details',{id: user.id})}}" class="btn btn-primary">Details</a>
+                        <a href="{{path('user.edit',{id: user.id})}}" class="btn btn-success">Edit</a>
+                        <a class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Delete</a>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Delete user</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure you want to delete user?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary" data-dismiss="modal">No</button>
+                                <a href="{{path('user.delete',{id: user.id})}}" class="btn btn-danger">Yes</a>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector('#search-input').addEventListener('input',filterList);
+    function filterList(){
+        const searchInput=document.querySelector('#search-input');
+        const filter=searchInput.value.toLowerCase();
+        const tr=document.querySelectorAll('#tricks');
+        tr.forEach((item)=>{
+            let text=item.textContent;
+            if(text.toLowerCase().includes(filter.toLowerCase())){
+                item.style.display= '';
+            }else{
+                item.style.display= 'none';
+            }
+        });
+    }
+</script>
+{% endblock %}

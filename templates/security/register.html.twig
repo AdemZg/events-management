@@ -1,0 +1,52 @@
+{% extends 'login-temp.html.twig' %}
+{% block dcTitle %}
+Register
+{% endblock %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+
+    <div class="container-fluid"style="width: 65%; margin-top:150px;">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Sign up</h6>
+            </div>
+            <div class="card-body">
+                {{ form_start(form) }}
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.firstname) }}
+            </div>
+            <div class="col-5">
+            {{ form_row(form.lastname) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.username) }}
+            </div>
+            <div class="col-5">
+            {{ form_row(form.email) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.plainPassword.first) }}
+            </div>
+            <div class="col-5">
+            {{ form_row(form.plainPassword.second) }}
+            </div>
+        </div>
+        <div class="mb-2">
+            <a class="small" href="{{path('login')}}">Already have an account?</a>
+        </div>
+    <button type="submit" class="btn btn-primary">Register</button>
+    {{ form_end(form) }}
+            </div>
+
+    </div>
+</div>
+{% endblock %}

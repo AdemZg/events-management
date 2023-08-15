@@ -1,0 +1,43 @@
+{% extends 'login-temp.html.twig' %}
+{% block dcTitle %}
+Log in
+{% endblock %}
+{% block title %}Log in!{% endblock %}
+
+{% block body %}
+<form method="post" action="{{path('login')}}" >
+    <div class="container-fluid  " style="width: 50%; margin-top:150px;">
+        <div class="card shadow mb-4 ">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Log in !</h6>
+            </div>
+            <div class="card-body">
+        <div class="row">
+        <div class="col-5">
+            <label for="inputUsername">Username</label>
+            <input type="text" value="{{ last_username }}" name="_username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
+            <label for="inputPassword">Password</label>
+            <input type="password" name="_password" id="inputPassword" class="form-control" autocomplete="current-password" required>
+                <div class="checkbox mt-2">
+                    <label>
+                        <input type="checkbox" name="_remember_me"> Remember me
+                    </label>
+                </div>
+                <div class="">
+                    <a class="small" href="">Forgot Password?</a>
+                </div>
+                <div class="mb-2">
+                    <a class="small" href="{{path('register')}}">Create an Account!</a>
+                </div>
+            <button class="btn btn-primary" type="submit">
+                Sign in
+            </button>
+        </div>
+        </div>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+{% endblock %}

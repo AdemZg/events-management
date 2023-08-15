@@ -1,0 +1,66 @@
+{% extends 'admin-temp.html.twig' %}
+{% block dcTitle %}Events{% endblock %}
+{% block body %}
+<h1 class="h3 mb-4 text-gray-800 font-weight-bold">List of Events</h1>
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Events Joined</h6>
+    </div>
+        <div class="ml-3 mb-1 mt-2"  >
+            <label>Search:<input type="search" id="search-input" class="form-control form-control-sm"></label>
+        </div>
+    <div class="card-body">
+        <div class="card-group">
+    {% for event in events %}
+    <div class="row">
+        <div class="col-4 ml-1">
+            <div class="solution_cards_box ml-4" id="tricking">
+                <div class="solution_card" id="boxing">
+                    <div class="hover_color_bubble"></div>
+                    <div class="so_top_icon">
+                    <img src="{{asset('uploads/images/'~ event.image)}}" alt="">
+                    </div>
+                    <div class="solu_title">
+                    <h3 class="font-weight-bold">{{event.name}}</h3>
+                    </div>
+                    <div class="solu_description">
+                        <p>
+                            {{event.club}}
+                        </p>
+                        <p class="font-weight-bold">
+                            {{event.description }}
+                        </p>
+                        <div class="mt-auto">
+                        <a href="{{path('event.details',{id: event.id})}}" class="btn btn-warning text-white  rounded-pill ">View</a>
+                        {% if is_granted('ROLE_ADMIN') %}
+                        <a href="{{path('event.edit',{id: event.id})}}" class="btn btn-success text-white  rounded-pill ">Edit</a>
+                        <a href="{{path('event.delete',{id: event.id})}}" class="btn btn-danger text-white  rounded-pill ">Delete</a>
+                        {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+        </div>
+    </div>
+</div>
+<script>
+    document.querySelector('#search-input').addEventListener('input',filterList);
+    function filterList(){
+        const searchInput=document.querySelector('#search-input');
+        const filter=searchInput.value.toLowerCase();
+        const tr=document.querySelectorAll('#tricking');
+        tr.forEach((item)=>{
+            let text=item.textContent;
+            if(text.toLowerCase().includes(filter.toLowerCase())){
+                item.style.display= '';
+            }else{
+                item.style.display= 'none';
+            }
+        });
+
+    }
+</script>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends 'admin-temp.html.twig' %}
+{% block dcTitle %}
+Edit Event
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="h3 mb-3 font-weight-normal">Edit Event</h1>
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-danger">Fill in the blanks please !</h6>
+            </div>
+            <div class="card-body">
+                {{ form_start(form,{'attr':{'novalidate':'novalidate'}}) }}
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.name) }}
+            </div>
+                    </div>
+        <div class="row">
+            <div class="col-5">
+            {{ form_row(form.description) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(form.beginsAt) }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-5">
+                {{ form_row(form.image) }}
+            </div>
+        </div>
+        {{form_rest(form)}}
+    </div>
+</div>
+{% endblock %}
